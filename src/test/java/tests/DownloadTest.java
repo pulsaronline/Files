@@ -1,3 +1,5 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 
 import org.junit.jupiter.api.Disabled;
@@ -14,7 +16,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
-
+// DOC: https://selenide.org/2019/12/10/advent-calendar-download-files/
 public class DownloadTest {
     @Test
     void downloadTest() throws IOException {

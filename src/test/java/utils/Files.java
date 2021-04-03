@@ -11,4 +11,9 @@ public static String readTextFromFile(File file) throws IOException {
     return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 }
 
+    public static String readTextFromPath(String path) throws IOException {
+File file = new File(path);
+return readTextFromFile(file);
+    }
+
 }
