@@ -109,7 +109,8 @@ public class Files {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             HWPFDocument docFile = new HWPFDocument(fileInputStream);
             WordExtractor extractor = new WordExtractor(docFile);
-            result=extractor.getText();
+            fileInputStream.close();
+            result = extractor.getText();
         return result;
     }
 

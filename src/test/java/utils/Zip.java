@@ -11,7 +11,8 @@ public static void unzip(String path, String unzipPath, String password) throws 
     }
     zipFile.extractAll(unzipPath);
 }
-    public static void unzip(String path, String unzipPath) throws ZipException {
+
+public static void unzip(String path, String unzipPath) throws ZipException {
         unzip(path, unzipPath,"");
     }
 }

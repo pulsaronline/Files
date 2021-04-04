@@ -23,7 +23,7 @@ public class ZipFileTests {
             unzip(zipFilePath, unzipFolderPath, zipPassword);
             String actualData = readTextFromPath(unzipTxtFilePath);
             assertThat(actualData, containsString(expectedData));
-            Files.deleteFile(unzipFolderPath);                              //clean the ./src/test/resources/files/unzip folder after job done
+            Files.deleteFile(unzipFolderPath);                              //delete "unzip" folder from the ./src/test/resources/files/ after job is done
     }
 
     @Test
@@ -36,6 +36,6 @@ public class ZipFileTests {
             unzip(zipFilePath, unzipFolderPath);
             String actualData = readTextFromPath(unzipTxtFilePath);
             assertThat(actualData, containsString(expectedData));
-            Files.deleteFile(unzipFolderPath);                              //clean the ./src/test/resources/files/unzip folder after job done
+            Files.deleteFile(unzipFolderPath);                              //delete "unzip" folder from the ./src/test/resources/files/ after job is done
     }
 }
