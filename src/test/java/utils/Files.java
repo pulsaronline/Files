@@ -3,6 +3,8 @@ package utils;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
@@ -95,6 +97,18 @@ public class Files {
             XWPFWordExtractor extractor = new XWPFWordExtractor(docxFile);
             fileInputStream.close();
             result = extractor.getText();
+        return result;
+    }
+
+    public static String getDoc(String path) throws IOException {
+        File file = getFile(path);
+        String filePath = file.getPath();
+        String result;
+
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            HWPFDocument docFile = new HWPFDocument(fileInputStream);
+            WordExtractor extractor = new WordExtractor(docFile);
+            result=extractor.getText();
         return result;
     }
 }
