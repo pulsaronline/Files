@@ -14,7 +14,7 @@ import static utils.Zip.unzip;
 
 public class ZipFileTests {
     @Test
-    void zipTest() throws IOException, ZipException {
+    void zipWithPasswordTest() throws IOException, ZipException {
         String zipFilePath = "./src/test/resources/files/1.zip";
         String unzipFolderPath = "./src/test/resources/files/unzip";
         String zipPassword = "";
@@ -27,5 +27,20 @@ public class ZipFileTests {
 
             String actualData = readTextFromPath(unzipTxtFilePath);
             assertThat(actualData, containsString(expectedData));
+    }
+
+    @Test
+    void zipTest() throws IOException, ZipException {
+        String zipFilePath = "./src/test/resources/files/1.zip";
+        String unzipFolderPath = "./src/test/resources/files/unzip";
+        String unzipTxtFilePath = "./src/test/resources/files/unzip/1.txt";
+
+        String expectedData = "hello qa.guru students!";
+
+
+        unzip(zipFilePath, unzipFolderPath);
+
+        String actualData = readTextFromPath(unzipTxtFilePath);
+        assertThat(actualData, containsString(expectedData));
     }
 }
