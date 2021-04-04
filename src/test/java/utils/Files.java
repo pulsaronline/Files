@@ -3,6 +3,8 @@ package utils;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
@@ -15,13 +17,13 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 public class Files {
-public static String readTextFromFile(File file) throws IOException {
+
+    public static String readTextFromFile(File file) throws IOException {
     return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 }
 
@@ -36,10 +38,11 @@ public static String readTextFromFile(File file) throws IOException {
     public static PDF getPdf(String path) throws IOException {
         return new PDF(getFile(path));
     }
+
     public static XLS getXls(String path) throws IOException {
         return new XLS(getFile(path));
     }
-    public static String readXlsxFromPath(String path){
+    public static String readXlsxFromPath(String path) {
         String result = "";
         XSSFWorkbook myExcelBook = null;
 
@@ -82,18 +85,31 @@ public static String readTextFromFile(File file) throws IOException {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return result;
+    }
 
+    public static String getDocx(String path) throws IOException, InvalidFormatException {
+        File docxFile = getFile(path);
+        String filePath = docxFile.getPath();
+        String result;
+            FileInputStream fis = new FileInputStream(filePath);
+            XWPFDocument docFile = new XWPFDocument(OPCPackage.open(fis));
+            XWPFWordExtractor extractor = new XWPFWordExtractor(docFile);
+            fis.close();
+            result = extractor.getText();
         return result;
     }
 
     public static String getDoc(String path) throws IOException, InvalidFormatException {
-        File docxFile = getFile(path);
-        String filePath = docxFile.getPath();
+        File docFile = getFile(path);
+        String filePath = docFile.getPath();
         String result;
-            FileInputStream inputStream = new FileInputStream(filePath);
-            XWPFDocument file = new XWPFDocument(OPCPackage.open(inputStream));
-            XWPFWordExtractor extractor = new XWPFWordExtractor(file);
-            result = extractor.getText();
+
+            FileInputStream fis = new FileInputStream(filePath);
+            HWPFDocument doc = new HWPFDocument(fis);
+            WordExtractor we = new WordExtractor(doc);
+            fis.close();
+            result = we.getText();
         return result;
     }
 }
