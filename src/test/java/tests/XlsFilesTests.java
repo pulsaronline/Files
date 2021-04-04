@@ -33,6 +33,7 @@ public class XlsFilesTests {
     void xlsxTest() throws IOException {
         String xlsFilePath = "./src/test/resources/files/1.xlsx";
         String expectedData = "hello qa.guru students!";
+
         String actualData = readXlsxFromPath(xlsFilePath);
         assertThat(actualData, containsString(expectedData));
     }

@@ -25,7 +25,7 @@ public class Files {
 
     public static String readTextFromFile(File file) throws IOException {
     return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-}
+    }
 
     public static String readTextFromPath(String path) throws IOException {
     return readTextFromFile(getFile(path));
@@ -92,6 +92,7 @@ public class Files {
         File file = getFile(path);
         String filePath = file.getPath();
         String result;
+
             FileInputStream fileInputStream = new FileInputStream(filePath);
             XWPFDocument docxFile = new XWPFDocument(OPCPackage.open(fileInputStream));
             XWPFWordExtractor extractor = new XWPFWordExtractor(docxFile);
@@ -110,5 +111,9 @@ public class Files {
             WordExtractor extractor = new WordExtractor(docFile);
             result=extractor.getText();
         return result;
+    }
+
+    public static void deleteFile(String filePath) throws IOException {
+            FileUtils.deleteDirectory(getFile(filePath));
     }
 }

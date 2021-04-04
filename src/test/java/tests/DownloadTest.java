@@ -25,7 +25,6 @@ public class DownloadTest {
         open("https://github.com/selenide/selenide/blob/master/README.md");
         File downloadedFile = $("#raw-url").download();
         String fileContent = Files.readTextFromFile(downloadedFile);
-        //assertTrue(fileContent.contains("Selenide = UI Testing Framework powered by Selenium WebDriver"));
         assertThat(fileContent, containsString("Selenide = UI Testing Framework powered by Selenium WebDriver"));
     }
 
