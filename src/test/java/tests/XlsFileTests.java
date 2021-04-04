@@ -10,8 +10,7 @@ import java.io.IOException;
 import static com.codeborne.pdftest.PDF.containsText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static utils.Files.getPdf;
-import static utils.Files.getXls;
+import static utils.Files.*;
 
 public class XlsFileTests {
     @Test
@@ -30,6 +29,13 @@ public class XlsFileTests {
 
         XLS xls = getXls(xlsFilePath);
         String actualData = xls.excel.getSheetAt(0).getRow(0).getCell(0).toString();
+        assertThat(actualData, containsString(expectedData));
+    }
+    @Test
+    void xlsxTest() throws IOException {
+        String xlsFilePath = "./src/test/resources/files/1.xlsx";
+        String expectedData = "hello qa.guru students!";
+        String actualData = readXlsxFromPath(xlsFilePath);
         assertThat(actualData, containsString(expectedData));
     }
 }
