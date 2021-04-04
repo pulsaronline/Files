@@ -20,7 +20,7 @@ public class DocFilesTest {
     }
 
     @Test
-    void docTest() throws IOException, InvalidFormatException {
+    void docTest() throws IOException {
         String docxFilePath = "./src/test/resources/files/1.doc";
         String expectedData = "hello qa.guru students!";
         String actualData = getDoc(docxFilePath);
