@@ -3,14 +3,19 @@ package utils;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
@@ -78,6 +83,17 @@ public static String readTextFromFile(File file) throws IOException {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    public static String getDoc(String path) throws IOException, InvalidFormatException {
+        File docxFile = getFile(path);
+        String filePath = docxFile.getPath();
+        String result;
+            FileInputStream inputStream = new FileInputStream(filePath);
+            XWPFDocument file = new XWPFDocument(OPCPackage.open(inputStream));
+            XWPFWordExtractor extractor = new XWPFWordExtractor(file);
+            result = extractor.getText();
         return result;
     }
 }
