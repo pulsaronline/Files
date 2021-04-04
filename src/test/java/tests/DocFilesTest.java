@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.containsString;
 import static utils.Files.getDoc;
 import static utils.Files.getDocx;
 
-public class DocFileTest {
+public class DocFilesTest {
     @Test
     void docxTest() throws IOException, InvalidFormatException {
         String docxFilePath = "./src/test/resources/files/1.docx";
