@@ -24,15 +24,15 @@ import java.util.Iterator;
 public class Files {
 
     public static String readTextFromFile(File file) throws IOException {
-    return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
     }
 
     public static String readTextFromPath(String path) throws IOException {
-    return readTextFromFile(getFile(path));
+        return readTextFromFile(getFile(path));
     }
 
     public static File getFile(String path) {
-    return new File(path);
+        return new File(path);
     }
 
     public static PDF getPdf(String path) throws IOException {
@@ -42,6 +42,7 @@ public class Files {
     public static XLS getXls(String path) throws IOException {
         return new XLS(getFile(path));
     }
+
     public static String readXlsxFromPath(String path) {
         String result = "";
         XSSFWorkbook myExcelBook = null;
@@ -92,25 +93,25 @@ public class Files {
         File file = getFile(path);
         String filePath = file.getPath();
 
-            FileInputStream fileInputStream = new FileInputStream(filePath);
-            XWPFDocument docxFile = new XWPFDocument(OPCPackage.open(fileInputStream));
-            XWPFWordExtractor extractor = new XWPFWordExtractor(docxFile);
-            fileInputStream.close();
-            return extractor.getText();
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        XWPFDocument docxFile = new XWPFDocument(OPCPackage.open(fileInputStream));
+        XWPFWordExtractor extractor = new XWPFWordExtractor(docxFile);
+        fileInputStream.close();
+        return extractor.getText();
     }
 
     public static String getDoc(String path) throws IOException {
         File file = getFile(path);
         String filePath = file.getPath();
 
-            FileInputStream fileInputStream = new FileInputStream(filePath);
-            HWPFDocument docFile = new HWPFDocument(fileInputStream);
-            WordExtractor extractor = new WordExtractor(docFile);
-            fileInputStream.close();
-            return extractor.getText();
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        HWPFDocument docFile = new HWPFDocument(fileInputStream);
+        WordExtractor extractor = new WordExtractor(docFile);
+        fileInputStream.close();
+        return extractor.getText();
     }
 
     public static void deleteFile(String filePath) throws IOException {
-            FileUtils.deleteDirectory(getFile(filePath));
+        FileUtils.deleteDirectory(getFile(filePath));
     }
 }

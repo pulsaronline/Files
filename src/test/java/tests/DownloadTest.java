@@ -35,7 +35,7 @@ public class DownloadTest {
 
     @Test
     @Disabled
-    void downloadTest1(){
+    void downloadTest1() {
         open("https://github.com/selenide/selenide/blob/master/README.md");
         try {
             $("#raw-url").download();

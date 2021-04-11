@@ -29,6 +29,7 @@ public class XlsFilesTests {
         String actualData = xls.excel.getSheetAt(0).getRow(0).getCell(0).toString();
         assertThat(actualData, containsString(expectedData));
     }
+
     @Test
     void xlsxTest() throws IOException {
         String xlsFilePath = "./src/test/resources/files/1.xlsx";
