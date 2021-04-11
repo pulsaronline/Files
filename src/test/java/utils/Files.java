@@ -91,27 +91,23 @@ public class Files {
     public static String getDocx(String path) throws IOException, InvalidFormatException {
         File file = getFile(path);
         String filePath = file.getPath();
-        String result;
 
             FileInputStream fileInputStream = new FileInputStream(filePath);
             XWPFDocument docxFile = new XWPFDocument(OPCPackage.open(fileInputStream));
             XWPFWordExtractor extractor = new XWPFWordExtractor(docxFile);
             fileInputStream.close();
-            result = extractor.getText();
-        return result;
+            return extractor.getText();
     }
 
     public static String getDoc(String path) throws IOException {
         File file = getFile(path);
         String filePath = file.getPath();
-        String result;
 
             FileInputStream fileInputStream = new FileInputStream(filePath);
             HWPFDocument docFile = new HWPFDocument(fileInputStream);
             WordExtractor extractor = new WordExtractor(docFile);
             fileInputStream.close();
-            result = extractor.getText();
-        return result;
+            return extractor.getText();
     }
 
     public static void deleteFile(String filePath) throws IOException {
